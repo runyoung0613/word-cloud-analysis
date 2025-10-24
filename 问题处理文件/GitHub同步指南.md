@@ -137,6 +137,29 @@ PS E:\Word_cloud_analysis> bash
    ```
 3. 验证：执行 `git status`，应显示 "nothing to commit, working tree clean"
 
+### 6. 文件管理说明
+- 文件状态颜色和标记说明 常见的状态标记（字母）
+1. M（Modified） - 表示文件已被修改
+   - 这意味着您对文件进行了编辑但尚未提交更改
+   - 对应Git命令输出中的 modified 状态
+2. A（Added） - 表示文件已被添加到暂存区
+   - 这是执行 git add 命令后的状态
+   - 对应Git命令输出中的 new file 或 added 状态
+3. U（Untracked） - 表示文件是未跟踪的
+   - 这些是新建的文件，Git还没有开始跟踪它们
+   - 需要执行 git add 将它们加入版本控制
+4. D（Deleted） - 表示文件已被删除
+   - 对应Git命令输出中的 deleted 状态
+5. C（Conflict） - 表示文件存在合并冲突
+   - 在合并分支或拉取远程更改时可能出现
+   - 需要手动解决冲突后再提交
+6. R（Renamed） - 表示文件已被重命名
+   - Git检测到文件被移动或重命名 颜色编码
+- 黄色 - 通常表示文件已被修改但尚未提交
+- 绿色 - 通常表示文件已添加到暂存区
+- 红色 - 通常表示未跟踪的文件或有冲突的文件
+- 蓝色 - 有时表示已提交的文件或只读文件
+
 ## 三、在GitHub创建远程仓库
 
 1. 登录GitHub账号
@@ -144,6 +167,7 @@ PS E:\Word_cloud_analysis> bash
 3. 填写仓库信息：
    - Repository name: 例如 "word-cloud-analysis"
    - Description: 简要描述你的项目
+   本项目旨在通过采集Caleb的对话内容，分析其情感倾向、情绪特征及人物性格，并通过词云等可视化方式呈现分析结果。
    - 选择 Public 或 Private
    - 不要勾选 "Initialize this repository with a README"（因为我们已经有README了）
 4. 点击 "Create repository"
@@ -153,46 +177,97 @@ PS E:\Word_cloud_analysis> bash
 创建完GitHub仓库后，你会看到一些命令提示。复制其中的 "git remote add origin" 命令，在本地执行：
 
 ```bash
-# 将 [your_username] 和 [repository_name] 替换为你实际的GitHub用户名和仓库名
-git remote add origin https://github.com/[your_username]/[repository_name].git
+# 将 runyoung 和 word-cloud-analysis 替换为你实际的GitHub用户名和仓库名
+git remote add origin https://github.com/runyoung0613/word-cloud-analysis.git
 
 # 验证远程仓库连接
 git remote -v
 ```
 
 ## 五、推送到GitHub
+- 将本地master分支推送到远程仓库（GitHub现在默认为main分支）
+  ```bash
+  git push -u origin master
+  ```
+  **详细流程说明：**
+  1. 打开 **PowerShell** 或 **Git Bash**，确保当前目录为 `E:\Word_cloud_analysis`
+  2. 执行上述命令后，Git会尝试连接远程仓库
+  3. 首次推送时，系统会弹出认证窗口（GitHub登录窗口）
+  4. 输入GitHub用户名（runyoung0613）和密码（注意：2021年8月后GitHub不再支持账户密码直接登录，需使用个人访问令牌）
+  5. 若认证成功，终端会显示推送进度，最终提示：
+     ```
+     Enumerating objects: XX, done.
+     Counting objects: 100% (XX/XX), done.
+     Delta compression using up to 8 threads
+     Compressing objects: 100% (XX/XX), done.
+     Writing objects: 100% (XX/XX), XX.XX KiB | XX.XX MiB/s, done.
+     Total XX (delta XX), reused 0 (delta 0), pack-reused 0
+     To https://github.com/runyoung0613/word-cloud-analysis.git
+      * [new branch]      master -> master
+     Branch 'master' set up to track remote branch 'master' from 'origin'.
+     ```
+  6. 推送完成后，访问GitHub仓库页面（https://github.com/runyoung0613/word-cloud-analysis）即可看到已上传的文件
 
-### 1. 首次推送
+### 配置个人访问令牌（PAT）的好处与创建步骤——命令行登录、安全访问私有仓库
 
-```bash
-# 将本地master分支推送到远程仓库（GitHub现在默认为main分支）
-git push -u origin master
-```
+> 说明：  
+> PAT 并不是“把 Private 仓库公开给其他人”的工具，而是**代替账户密码**，让 Git 在命令行或脚本里能安全地通过 HTTPS 认证，从而访问**你自己有权限的仓库**（无论 Public 还是 Private）。  
+> 若想让**其他特定人**访问你的 Private 仓库，应进入 GitHub 仓库 → Settings → Manage access → Invite a collaborator，而不是分享 PAT。
 
-如果GitHub提示默认分支是main而不是master，你可以：
+**命令行登录的好处：**
+1. **自动化**：配合脚本、CI/CD 可无人值守推送/拉取。  
+2. **跨平台**：Windows、macOS、Linux 同一套命令，无需额外 GUI。  
+3. **速度快**：省去打开浏览器、手动点按的时间，一步到位。  
+4. **安全可控**：PAT 可随时撤销、设定有效期，比长期保存密码更安心。  
+5. **权限精细**：只给所需最小 scope，降低泄露风险。  
 
-```bash
-# 将本地master重命名为main
-git branch -M main
+1. **登录GitHub账户**
+   - 打开浏览器访问 https://github.com/login
+   - 输入用户名 `runyoung0613` 和密码登录
 
-# 推送到远程main分支
-git push -u origin main
-```
+2. **进入开发者设置**
+   - 点击右上角头像 → 选择 **"Settings"**
+   - 在左侧菜单最底部找到 **"Developer settings"** 并点击
 
-### 2. 输入GitHub凭证
+3. **创建新令牌**
+   - 在左侧选择 **"Personal access tokens"** → **"Tokens (classic)"**
+   - 点击绿色按钮 **"Generate new token"** → 选择 **"Generate new token (classic)"**
 
-首次推送时，系统会提示你输入GitHub的用户名和密码（或个人访问令牌）。
+4. **配置令牌权限**
+   - **Note（令牌名称）**：建议填写有意义的名称，如 `WordCloud-Project-Access`
+   - **Expiration（有效期）**：根据需求选择（推荐90天）
+   - **Select scopes（权限范围）**：必须勾选以下权限：
+     ```
+     ☑ repo (Full control of private repositories) - 包含所有仓库操作权限
+     ☑ workflow (Update GitHub Action workflows) - 如需使用GitHub Actions
+     ```
+   - 其他权限根据项目需求可选（如 `delete_repo` 删除仓库权限）
 
-**注意：** 自2021年8月起，GitHub不再支持使用密码进行身份验证，你需要创建个人访问令牌（PAT）。
+5. **生成并保存令牌**
+   - 滚动到页面底部点击 **"Generate token"**
+   - **重要**：生成的令牌只显示一次！请立即复制并保存到安全位置（如密码管理器）
+   - 令牌格式类似：`ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
-#### 如何创建个人访问令牌：
+6. **使用令牌推送代码**
+   - 当Git提示输入密码时，粘贴刚才生成的令牌（注意令牌是敏感信息，输入时不会显示字符）
+   - 示例推送过程：
+     ```bash
+     $ git push -u origin master
+     Username for 'https://github.com': runyoung0613
+     Password for 'https://runyoung0613@github.com': <这里粘贴令牌而不是密码>
+     ```
+   - 成功后会显示与步骤5相同的推送完成信息
 
-1. 登录GitHub，点击右上角头像 -> Settings
-2. 选择 Developer settings -> Personal access tokens -> Tokens (classic)
-3. 点击 "Generate new token" -> "Generate new token (classic)"
-4. 设置Token名称，选择权限（至少需要repo权限）
-5. 点击 "Generate token" 并复制生成的令牌
-6. 推送到GitHub时，将密码替换为这个令牌
+#### 常见问题处理：
+
+- **令牌失效**：若推送时提示 `remote: Invalid username or password.`，可能是令牌过期，需重新生成
+- **权限不足**：确保令牌勾选了 `repo` 权限，否则会提示 `403 Forbidden`
+- **保存令牌**：可将令牌添加到Git凭据管理器避免重复输入：
+  ```bash
+  git config --global credential.helper store  # 下次会提示保存凭据（不安全，不推荐公用电脑）
+  # 或更安全的方式（Windows）：
+  git config --global credential.helper manager-core
+  ```
 
 ## 六、后续工作流程
 
