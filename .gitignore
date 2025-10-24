@@ -1,0 +1,40 @@
+# Python 编译缓存目录：忽略字节码缓存
+__pycache__/
+
+# Python 字节码文件：忽略 .pyc / .pyo / .pyd 等编译产物
+*.py[cod]
+
+# Python 运行时生成的类缓存
+*$py.class
+
+# C/C++ 扩展模块：忽略已编译的共享对象
+*.so
+
+# 虚拟环境根目录标记（旧版）
+.Python
+
+# 常见虚拟环境目录名（按惯例）
+env/
+venv/
+ENV/
+
+# 环境变量配置文件（含敏感信息）
+.env
+
+# pytest 测试框架缓存
+.pytest_cache/
+
+# 日志文件
+*.log
+
+# 生成的图片结果（示例：词云图）
+*.png
+
+# 分析结果输出目录
+analysis_results/
+
+# macOS 系统文件
+.DS_Store
+
+# Windows 缩略图缓存
+Thumbs.db
