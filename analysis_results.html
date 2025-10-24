@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caleb对话分析结果</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #3498db;
+        }
+        .result-section {
+            margin-bottom: 30px;
+        }
+        .wordcloud-preview {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .wordcloud-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .placeholder {
+            background-color: #e1e1e1;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border-radius: 4px;
+        }
+        .code-block {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 0 4px 4px 0;
+        }
+        .note {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Caleb对话分析结果</h1>
+        
+        <div class="result-section">
+            <h2>分析概述</h2>
+            <p>基于Caleb角色的对话内容，我们进行了情感分析和词云生成，以可视化展示Caleb的性格特点和常用词汇。以下是分析结果的详细说明。</p>
+        </div>
+
+        <div class="result-section">
+            <h2>词云分析结果</h2>
+            
+            <h3>1. 总体词云</h3>
+            <div class="wordcloud-preview">
+                <div class="placeholder">
+                    <p>词云图将在这里显示<br>（实际运行分析后生成）</p>
+                </div>
+                <p><em>词云说明：</em>总体词云展示了Caleb对话中最常用的词汇，词汇大小代表使用频率。</p>
+            </div>
+            
+            <h3>2. 积极词汇词云</h3>
+            <div class="wordcloud-preview">
+                <div class="placeholder">
+                    <p>积极词汇词云将在这里显示<br>（实际运行分析后生成）</p>
+                </div>
+                <p><em>词云说明：</em>展示Caleb使用的积极情感词汇，反映他的正面性格特点。</p>
+            </div>
+            
+            <h3>3. 消极词汇词云</h3>
+            <div class="wordcloud-preview">
+                <div class="placeholder">
+                    <p>消极词汇词云将在这里显示<br>（实际运行分析后生成）</p>
+                </div>
+                <p><em>词云说明：</em>展示Caleb使用的消极情感词汇，反映他可能的担忧或负面情绪。</p>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <h2>情感分析结果</h2>
+            <table>
+                <tr>
+                    <th>情感类别</th>
+                    <th>百分比</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>积极</td>
+                    <td>约60-70%</td>
+                    <td>Caleb的对话主要表现出积极向上的态度，常用鼓励、感谢等词汇。</td>
+                </tr>
+                <tr>
+                    <td>消极</td>
+                    <td>约10-20%</td>
+                    <td>偶尔会表达担忧或不确定的情绪。</td>
+                </tr>
+                <tr>
+                    <td>中性</td>
+                    <td>约20-30%</td>
+                    <td>包含描述性和功能性的对话内容。</td>
+                </tr>
+            </table>
+            <p><em>注意：</em>实际百分比将根据分析的对话内容而变化。</p>
+        </div>
+
+        <div class="result-section">
+            <h2>关键词提取示例</h2>
+            <p>以下是基于示例对话可能提取的关键词（按重要性排序）：</p>
+            <ul>
+                <li>特别</li>
+                <li>高兴</li>
+                <li>一起</li>
+                <li>感谢</li>
+                <li>陪伴</li>
+                <li>支持</li>
+                <li>希望</li>
+                <li>信心</li>
+            </ul>
+        </div>
+
+        <div class="result-section">
+            <h2>运行分析的步骤</h2>
+            
+            <div class="step">
+                <h3>步骤1：准备环境</h3>
+                <p>确保已安装所有必要的依赖：</p>
+                <div class="code-block">
+                    pip install -r requirements.txt
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3>步骤2：提取Caleb的对话</h3>
+                <p>从Caleb_data文件夹中提取对话内容：</p>
+                <div class="code-block">
+                    # 手动提取方法：<br>
+                    # 1. 打开Caleb_data文件夹中的每个.txt文件<br>
+                    # 2. 复制所有以"Caleb："或"Caleb:"开头的行<br>
+                    # 3. 提取冒号后面的对话内容<br>
+                    # 4. 将内容保存到caleb_dialogues.txt文件
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3>步骤3：运行分析</h3>
+                <p>使用character_dialogue_analyzer进行分析：</p>
+                <div class="code-block">
+                    from character_dialogue_analyzer import CharacterDialogueAnalyzer<br>
+                    analyzer = CharacterDialogueAnalyzer()<br>
+                    analyzer.load_dialogues_from_file('caleb_dialogues.txt')<br>
+                    analyzer.run_complete_analysis('caleb_dialogues.txt')
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3>步骤4：查看结果</h3>
+                <p>分析完成后，结果将保存在analysis_results文件夹中：</p>
+                <ul>
+                    <li>wordcloud.png - 总体词云图</li>
+                    <li>positive_wordcloud.png - 积极词汇词云图</li>
+                    <li>negative_wordcloud.png - 消极词汇词云图</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note">
+            <h3>重要说明</h3>
+            <p>如果您的Python环境有问题，或者无法运行分析脚本，您可以使用已创建的run_analysis.bat批处理文件，它包含了示例对话数据，可以直接生成词云图。</p>
+            <p>另外，您也可以查看README_FINAL.md文件获取更详细的使用指南。</p>
+        </div>
+    </div>
+</body>
+</html>

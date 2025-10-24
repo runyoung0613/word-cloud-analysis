@@ -209,10 +209,11 @@ git remote -v
   6. 推送完成后，访问GitHub仓库页面（https://github.com/runyoung0613/word-cloud-analysis）即可看到已上传的文件
 
 ### 配置个人访问令牌（PAT）的好处与创建步骤——命令行登录、安全访问私有仓库
-
+---这个目前不考虑使用
 > 说明：  
 > PAT 并不是“把 Private 仓库公开给其他人”的工具，而是**代替账户密码**，让 Git 在命令行或脚本里能安全地通过 HTTPS 认证，从而访问**你自己有权限的仓库**（无论 Public 还是 Private）。  
-> 若想让**其他特定人**访问你的 Private 仓库，应进入 GitHub 仓库 → Settings → Manage access → Invite a collaborator，而不是分享 PAT。
+> 若想让**其他特定人**与你一起编写、更改并维护这个仓库，应进入 GitHub 仓库 → Settings（页面最右侧「Settings」标签）→ 左侧菜单 → Collaborators→ 点击「Invite a collaborator」→ 输入对方 GitHub 用户名或邮箱并发送邀请。对方接受后即可克隆、推送、拉取，与你协同开发。  
+> 注意：不要把 PAT 发给别人，PAT 只用于命令行认证，不能替代协作者邀请。
 
 **命令行登录的好处：**
 1. **自动化**：配合脚本、CI/CD 可无人值守推送/拉取。  
@@ -279,10 +280,10 @@ git status
 
 # 添加修改的文件
 git add .  # 添加所有修改
-git add 特定文件路径  # 添加特定文件
+git add 文件名或相对路径  # 例如：git add data/caleb_chat.txt 或 git add README.md
 
 # 提交修改
-git commit -m "描述你的修改内容"
+git commit -m "本次提交说明"
 
 # 推送到GitHub
 git push
@@ -294,7 +295,10 @@ git push
 
 ```bash
 # 拉取远程更新
-git pull
+`git pull` 会把远程仓库的最新提交合并到本地当前分支；  
+若本地没有未提交的改动，它相当于“同步更新”；  
+若本地也有改动且与远程冲突，会提示合并冲突，需手动解决，**不会直接覆盖本地代码**。  
+如需强制用远程版本覆盖本地，需额外加参数（如 `git fetch --all && git reset --hard origin/分支名`），但**会丢失本地未推送的改动，慎用**。
 ```
 
 ## 七、使用Anaconda命令行工具
@@ -320,6 +324,7 @@ git pull
 如果你不熟悉命令行，可以考虑使用图形化Git客户端：
 
 - GitHub Desktop: 官方的GitHub客户端，简单易用
+注意：GitHub Desktop 不支持命令行登录，只能使用浏览器登录。
 - GitKraken: 功能强大的Git GUI工具
 - SourceTree: Atlassian开发的免费Git客户端
 
